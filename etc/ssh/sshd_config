@@ -10,7 +10,7 @@
 # possible, but leave them commented.  Uncommented options override the
 # default value.
 
-#Port 22
+Port 22
 #AddressFamily any
 #ListenAddress 0.0.0.0
 #ListenAddress ::
@@ -53,7 +53,7 @@
 #IgnoreRhosts yes
 
 # To disable tunneled clear text passwords, change to no here!
-PasswordAuthentication no
+PasswordAuthentication yes
 #PermitEmptyPasswords no
 
 # Change to yes to enable challenge-response passwords (beware issues with
@@ -113,7 +113,12 @@ PrintMotd no
 AcceptEnv LANG LC_*
 
 # override default of no subsystems
-Subsystem	sftp	/usr/lib/openssh/sftp-server
+#Subsystem	sftp	/usr/lib/openssh/sftp-server
+
+Subsystem sftp internal-sftp
+Match group sftpserver
+ChrootDirectory /home/sftpserver
+ForceCommand internal-sftp
 
 # Example of overriding settings on a per-user basis
 #Match User anoncvs
